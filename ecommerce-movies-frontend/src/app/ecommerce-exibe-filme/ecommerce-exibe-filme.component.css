@@ -1,0 +1,28 @@
+input, select, textarea {
+    border: none;
+}
+
+textarea {
+    height: 150%;
+    resize: none;
+    width: 250%;
+}
+
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+p, label {
+    font-weight: bold;
+}
+
+img {
+    margin-left: 50%;
+}
+
+button {
+    margin-bottom: 4%;
+}

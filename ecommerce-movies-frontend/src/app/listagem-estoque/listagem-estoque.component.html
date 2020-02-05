@@ -1,0 +1,35 @@
+<br>
+<h4>Estoque de Filmes</h4>
+<table class="table">
+	<thead>
+		<tr class="p-3 mb-2 bg-info text-white">
+			<th scope="col">#</th>
+			<th scope="col">Id Filme</th>
+			<th scope="col">Fornecedor</th>
+			<th scope="col">Qtde. em estoque</th>
+			<th scope="col">Valor de compra</th>
+			<th scope="col">Valor de venda</th>
+			<th scope="col">Situação</th>
+			<th scope="col">Opções</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="item-estoque" *ngFor="let estoque of estoques">
+			<th scope="row">{{estoque.id}}</th>
+			<td>{{estoque.id_filme}}</td>
+			<td>{{estoque.fornecedor}}</td>
+			<td>{{estoque.quantidade_estoque}}</td>
+			<td>{{estoque.valor_compra}}</td>
+			<td>{{estoque.valor_venda}}</td>
+			<td>{{estoque.status ? 'Ativo' : 'Inativo'}}</td>
+			<td>
+				<button class="btn btn-outline-info" routerLink="/altera-estoque/{{estoque.id}}">
+					Alterar Estoque
+				</button>
+				<button class="btn btn-outline-danger" type="submit" (click)="deletarEstoque(estoque)">
+					<a class="item-estoque-delete" href="javascript: void(0);">Deletar Estoque</a>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

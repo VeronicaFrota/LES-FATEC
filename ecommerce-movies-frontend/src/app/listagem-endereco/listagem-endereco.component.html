@@ -1,0 +1,33 @@
+<br>
+<h4>Clientes Cadastrados</h4>
+<table class="table">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Id Cliente</th>
+			<th scope="col">Logradouro</th>
+			<th scope="col">Bairro</th>
+			<th scope="col">Cidade
+			<th scope="col">Situação</th>
+			<th scope="col">Opções</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="item-endereco" *ngFor="let endereco of enderecos">
+			<th scope="row">{{endereco.id}}</th>
+			<td>{{endereco.idCliente}}</td>
+			<td>{{endereco.logradouro}}</td>
+			<td>{{endereco.bairro}}</td>
+			<td>{{endereco.idCidade}}</td>
+			<td>{{endereco.status ? 'Ativo' : 'Inativo'}}</td>
+			<td>
+				<button routerLink="/altera-endereco/{{endereco.id}}">
+					Alterar Endereco
+				</button>
+				<button type="submit" (click)="deletarEndereco(endereco)">
+					<a class="item-endereco-delete" href="javascript: void(0);">Deletar Endereco</a>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

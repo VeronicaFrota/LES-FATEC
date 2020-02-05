@@ -1,0 +1,16 @@
+{
+    "frete": [
+        {
+            "id": "1",
+            "nome": "rua de teste1",
+            "valor_frete": "12",
+            "prazo_entrega": "25"
+        },
+        {
+            "id": "2",
+            "nome": "rua de teste2",
+            "valor_frete": "42",
+            "prazo_entrega": "5"
+        }
+    ]
+}

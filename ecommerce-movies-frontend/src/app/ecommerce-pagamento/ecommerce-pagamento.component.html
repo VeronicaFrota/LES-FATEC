@@ -1,0 +1,84 @@
+<br>
+<div class="login-form-head">
+	<h4>Endereço de Entrega e Pagamento</h4>
+</div>
+<div class="login-form-body">
+	<!-- <form [formGroup]="form" (submit)="onSubmit()"> -->
+	<br>
+	<br>
+	<h4>Endereços de Entrega</h4>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<!--<th scope="col">Id Cliente</th>-->
+				<th scope="col">Logradouro</th>
+				<th scope="col">Bairro</th>
+				<th scope="col">Cidade
+				<th>
+				<th scope="col">Status
+				<th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="item-endereco" *ngFor="let endereco of enderecos">
+				<th scope="row">{{endereco.id}}</th>
+				<!--<td>{{endereco.idCliente}}</td>-->
+				<td>{{endereco.logradouro}}</td>
+				<td>{{endereco.bairro}}</td>
+				<td>{{endereco.idCidade}}</td>
+				<td>{{endereco.status ? 'Ativo' : 'Inativo'}}</td>
+				<td>
+					<button routerLink="/altera-endereco/{{endereco.id}}">
+						Alterar Endereco
+					</button>
+					<button (click)="deletarEndereco(endereco)">
+						<a class="item-endereco-delete" href="javascript: void(0);">Deletar Endereco</a>
+					</button>
+				</td>
+			</tr>
+			<button (click)="cadastrarEndereco()">
+				Cadastrar Novo Endereco
+			</button>
+		</tbody>
+	</table>
+	<br>
+	<br>
+	<h4>Cartão</h4>
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<!--<th scope="col">Id Cliente</th>-->
+				<th scope="col">Numero do Cartao</th>
+				<th scope="col">Data de Validade</th>
+				<th scope="col">Bandeira
+				<th>
+				<th scope="col">Status
+				<th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="item-cartao" *ngFor="let cartao of cartaos">
+				<th scope="row">{{cartao.id}}</th>
+				<!--<td>{{cartao.idCliente}}</td>-->
+				<td>{{cartao.numeroCartao}}</td>
+				<td>{{cartao.dataValidade}}</td>
+				<td>{{cartao.idBandeira}}</td>
+				<td>{{cartao.status ? 'Ativo' : 'Inativo'}}</td>
+				<td>
+					<button routerLink="/altera-cartao/{{cartao.id}}">
+						Alterar Cartao
+					</button>
+					<button (click)="deletarCartao(cartao)">
+						<a class="item-cartao-delete" href="javascript: void(0);">Deletar Cartao</a>
+					</button>
+				</td>
+			</tr>
+			<button (click)="cadastrarCartao()">
+				Cadastrar Novo Cartao
+			</button>
+		</tbody>
+	</table>
+	<!-- </form> -->
+</div>

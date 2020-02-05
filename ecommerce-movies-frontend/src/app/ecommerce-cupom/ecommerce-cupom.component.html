@@ -1,0 +1,19 @@
+<form [formGroup]="form" (submit)="onSubmit()">
+	<div class="card-body">
+		<h5 class="card-title">Cupom</h5>
+		<p class="card-text">Utilize o código do seu cupom para recer descontos</p>
+		<input 
+			style="margin-bottom: 4%" 
+			class="form-control"
+			type="text"
+			id="codigo"
+			name="codigo" 
+			placeholder="4RV538715" 
+			maxlength="40" 
+			formControlName="codigo" />
+
+		<button type="submit" class="btn btn-primary" (click)="aplicarCupom()">
+			Aplicar
+		</button>
+	</div>
+</form>

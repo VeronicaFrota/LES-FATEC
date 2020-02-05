@@ -1,0 +1,102 @@
+<br>
+<div style="text-align: center" class="login-form-head">
+	<h2>Filmes mais populares</h2>
+</div>
+<br>
+<div class="row">
+	<div class="col-sm-4 item-filme" *ngFor="let filme of filmes">
+		<div class="card">
+			<div class="card-body">
+				<img class="card-img-top" src="assets/img/filmes_padrao.png" alt="Card image cap">
+				<h5 class="card-title">{{filme.nome}}</h5>
+				<h5 class="card-text">{{filme.estoque.valor_venda | currency: 'BRL': true }}</h5>
+				<button class="btn btn-primary" routerLink="/ecommerce-exibe-filme/{{filme.id}}">
+					Comprar
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<button class="btn btn-success" id="btn-busca-filme" routerLink="/busca-filme">
+		Pesquisar por Filmes
+	</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <table class="table">
+	<div class="row">
+		<div class="col-sm-3">
+			<tr class="item-filme" *ngFor="let filme of filmes">
+				<td>
+					<div class="card" style="width: 18rem;">
+						<img class="card-img-top" src="assets/img/filmes_padrao.png" alt="Card image cap">
+						<div class="card-body" style="text-align: center">
+							<h5 class="card-title">
+				<td>{{filme.nome}}</td>
+				</h5>
+				<p class="card-text">
+					<td>R${{filme.estoque.valor_venda}}</td>
+				</p>
+				<button class="btn btn-primary" routerLink="/ecommerce-exibe-filme/{{filme.id}}">
+					Comprar
+				</button>
+		</div>
+	</div>
+	</td>
+	</tr>
+	</div>
+	</div>
+</table>
+-->
+
+<!-- <div class="row" *ngFor="let filme of filmes">
+	<div class="card" style="width: 18rem;">-->
+<!-- <div class="col">
+			<img class="card-img-top" src="assets/img/filmes_padrao.png" alt="Card image cap">
+		</div>
+		<div class="col" style="text-align: center">
+			
+				<td>{{filme.nome}}</td>
+		</div>
+		<div class="col">
+			<p class="card-text">
+				<td>R${{filme.estoque.valor_venda}}</td>
+			</p>
+		</div>
+		<div class="col">
+			<button  class="btn btn-primary" routerLink="/ecommerce-exibe-filme/{{filme.id}}">
+				Comprar
+			</button>
+		</div> -->
+<!--</div>
+</div> -->

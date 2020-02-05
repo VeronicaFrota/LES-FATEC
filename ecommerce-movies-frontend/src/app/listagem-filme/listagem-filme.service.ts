@@ -1,0 +1,18 @@
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { ListagemFilme } from 'src/modelos';
+
+@Injectable({
+	providedIn: 'root'
+})
+export class ListagemFilmeService {
+
+	constructor(private http: HttpClient) { }
+
+	//private readonly API = 'https://swapi.co/'
+	private readonly API = 'http://localhost:8084/filmes/'
+
+	list() {
+		return this.http.get<ListagemFilme[]>(this.API);
+	}
+}

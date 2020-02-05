@@ -1,0 +1,37 @@
+<br>
+<div class="login-form-head" style="text-align: center">
+	<h4 style="margin-top: 12%;">Faça seu login</h4>
+	<p>Entre com seu email e senha</p>
+</div>
+<div class="login-form-body" style="margin-left: 35%;">
+	<form [formGroup]="form" (submit)="onSubmit()">
+		<div class="form-group row">
+			<div class="col-sm-6">
+				<input required class="form-control" type="text" id="email" name="email" formControlName="email"
+					placeholder="Insira seu email" [ngClass]=" { 'is-invalid': submitted && hasError('email') } ">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<div class="col-sm-6">
+				<input required class="form-control" type="password" id="senha" name="senha" formControlName="senha"
+					placeholder="Insira a Senha" [ngClass]=" { 'is-invalid': submitted && hasError('senha') } ">
+			</div>
+		</div>
+
+		<div>
+			<p style="color: #FF0000; text-align: center">{{serverError}}</p>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-6">
+				<button type="submit" class="btn btn-primary btn-block">Entrar</button>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-6">
+				<button type="submit" class="btn btn-primary btn-block" (click)="navigateTo()">Cadastre-se</button>
+			</div>
+		</div>
+
+	</form>
+</div>

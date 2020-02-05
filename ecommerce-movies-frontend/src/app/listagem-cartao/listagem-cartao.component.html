@@ -1,0 +1,35 @@
+<br>
+<br>
+<h2>Cartões Cadastrados</h2>
+<table class="table">
+	<thead class="p-3 mb-2 bg-info text-white">
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Id Cliente</th>
+			<th scope="col">Numero do Cartao</th>
+			<th scope="col">Data de Validade</th>
+			<th scope="col">Bandeira
+			<th>
+			<th scope="col">Status
+			<th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="item-cartao" *ngFor="let cartao of cartaos">
+			<th scope="row">{{cartao.id}}</th>
+			<td>{{cartao.idCliente}}</td>
+			<td>{{cartao.numeroCartao}}</td>
+			<td>{{cartao.dataValidade}}</td>
+			<td>{{cartao.idBandeira}}</td>
+			<td>{{cartao.status ? 'Ativo' : 'Inativo'}}</td>
+			<td>
+				<button routerLink="/altera-cartao/{{cartao.id}}">
+					Alterar Cartao
+				</button>
+				<button type="submit" (click)="deletarCartao(cartao)">
+					<a class="item-cartao-delete" href="javascript: void(0);">Deletar Cartao</a>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

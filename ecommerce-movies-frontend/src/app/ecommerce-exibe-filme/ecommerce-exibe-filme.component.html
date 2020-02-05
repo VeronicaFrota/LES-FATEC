@@ -1,0 +1,75 @@
+<br>
+<div class="login-form-body">
+		<div class="row">
+			<div class="col-6">
+				<img class="card-img-top" src="assets/img/filmes_padrao.png" alt="Card image cap">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<h1>
+							<!-- <input  style="margin-left: 80%;" formControlName="nome"> -->
+						</h1>
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<label>Código:</label> {{filme.codigo_barras}}
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<label>	Preço: </label> {{filme.estoque.valor_venda | currency: 'BRL': true }}
+					</div>
+				</div>
+
+				<div class="form-group row">			
+					<div class="col-sm-10">
+						<label>Ano: </label> {{filme.ano}}
+					</div>
+				</div>
+			
+				<div class="form-group row">
+					<div class="col-sm-10">
+							<label>País de Origem:</label> 
+							{{filme.pais_origem.id}} <!-- {{filme.pais_origem.nome}} -->						
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<label>Gênero:</label> {{filme.genero.id}}  <!-- {{filme.genero.nome}} -->
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<label>Classificação Etária:</label> {{filme.classificacao_etaria.id}}
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-10">
+						<label>Idioma:</label> {{filme.idioma.id}}
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-sm-12">
+						<label>Sinopse:</label> {{filme.sinopse}}
+					</div>
+				</div>
+			</div>
+		</div>
+		<button class="btn btn-primary" (click)="teste(filme)">
+			Comprar
+		</button>
+		&nbsp;
+		<button class="btn btn-success" routerLink="/ecommerce-index">
+			Voltar
+		</button>	
+</div>

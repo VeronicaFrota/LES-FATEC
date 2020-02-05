@@ -1,0 +1,408 @@
+<br>
+<h4>Seu(s) Produto(s)</h4>
+<br>
+<form [formGroup]="form"> 
+	<div class="row" style="margin-bottom: 3%; font-weight: bold;">
+		<div class="col"></div>
+		<div class="col">Item(s)</div>
+		<div class="col"></div>
+		<div class="col">Preço</div>
+		<div class="col">Quantidade</div>
+		<div class="col">Total</div>
+		<div class="col"></div>
+	</div>
+
+	<div class="row" *ngFor="let item of carrinho  let i = index" [attr.data-index]="i">
+
+		<div class="col">{{i + 1}}</div>
+
+		<div class="col">
+			<img src="assets/img/filmes_padrao.png" alt="Card image cap">
+		</div>
+
+		<div class="col">{{item.nome}}</div>
+
+		<div class="col">{{ item.estoque.valor_venda | currency: 'BRL': true }}</div>
+
+		<div class="col">
+			<select
+				class="custom-select mr-sm-2"
+				id="quantidadeComprada"
+				formControlName="quantidadeComprada"
+				(change)="testeSoma($event, i)">
+				<option value="1" selected>1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+			</select>
+		</div>
+
+		<div class="col">{{item.total_compra | currency: 'BRL': true}}</div>
+		
+		<div class="col">
+			<button type="submit" class="btn btn-danger" (click)="removerCarrinho(i)">
+				Remover
+			</button>
+		</div>
+	</div>
+
+	<div class="row">
+		<button style="margin-left: 80%; margin-top: 4%; margin-bottom: 4%;" class="btn btn-success"
+			routerLink="/ecommerce-index">
+			Continuar Comprando
+		</button>
+	</div>
+
+	<div class="row">
+		<div class="card" style="margin-right: 2%;">
+			<div class="card-body">
+				<h5 class="card-title">Cupom</h5>
+				<p class="card-text">Utilize o código do seu cupom para recer descontos</p>
+				<input 
+					style="margin-bottom: 4%" 
+					class="form-control"
+					type="text"
+					id="codigo"
+					name="codigo" 
+					placeholder="4RV538715" 
+					maxlength="40" 
+					formControlName="codigo" />
+
+				<button type="submit" class="btn btn-primary" (click)="aplicarCupom()">
+					Aplicar
+				</button>
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-body">
+				<div class="panel-heading">
+					<h5 class="card-title">Consulte o valor do seu frete</h5>
+				</div>
+				<div class="col-lg-12 form-group">
+					<label>Digite seu CEP</label>
+					<input 
+						class="form-control"
+						id="frete"
+						name="frete"
+						placeholder="08978-800" 
+						id="frete"
+						type="text" 
+						maxlength="9"
+						formControlName="frete" />
+				</div>
+		
+				<div class="col-lg-12 form-group">
+					<button type="submit" class="btn btn-primary" (click)="calcularFrete()">
+						Consultar
+					</button>
+					<a href="http://www.buscacep.correios.com.br/servicos/dnec/index.do" 
+						title="Não sei meu CEP"	target="_blank" class="link">
+						Não sei meu CEP
+					</a>
+				</div>
+			</div>
+		
+			<div class="col-lg-12" style="float: left;">
+				<div *ngIf="frete">
+					<p>
+						<b>Valor do Frete: </b> {{ frete?.valor_frete | currency: 'BRL': true }}
+					</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="card">
+				<!--*ngFor="let item of carrinho  let i = index" [attr.data-index]="i"  -->
+				<div class="card-body" style="padding-bottom: 27%; font-weight: bold">
+					<h5 class="card-title">Total da compra</h5>
+					<p class="card-text">
+						Total: <label> {{ total() | currency: 'BRL': true }} </label>
+					</p>
+					<p class="card-text">
+						Frete: <label>{{ frete?.valor_frete | currency: 'BRL': true }}</label>
+					</p>
+					<p class="card-text">
+						Cupom: <label>{{ pedido.valor_cupom | currency: 'BRL': true }}</label>
+					</p>
+					<!-- <p class="card-text">
+						SubTotal: <label>R$ 34,00</label>
+					</p> -->
+					
+					<!-- <button class="btn btn-primary" (click)="mandarPedido()">
+						Continuar
+					</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-sm-12">
+		<br>
+		<div class="login-form-head">
+			<h4>Endereço de Entrega e Pagamento</h4>
+		</div>
+		<div class="login-form-body">
+			<br>
+			<br>
+			<h4>Endereços de Entrega</h4>
+			<table class="table" style="margin-bottom: 4%">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Logradouro</th>
+						<th scope="col">Bairro</th>
+						<th scope="col">Cidade</th>
+						<th scope="col">Situação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr class="item-endereco" *ngFor="let endereco of cliente.endereco  let i = index" [attr.data-index]="i">
+						<th scope="row">{{ i + 1}}</th>
+						<td>{{endereco?.logradouro}}</td>
+						<td>{{endereco?.bairro}}</td>
+						<td>{{endereco?.idCidade}}</td>
+						<td>
+							<div *ngIf="endereco.selected">
+								<span class="badge badge-success" style="cursor: pointer;">Em uso</span>
+							</div>
+							<div *ngIf="!endereco.selected" (click)="selectEndereco(endereco)">
+								<span class="badge badge-primary" style="cursor: pointer;">Usar este endereço</span>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- <button routerLink="/altera-endereco/{{endereco.id}}"> -->
+			<!-- <button  class="btn btn-primary" routerLink="/altera-endereco/">
+				Alterar Endereco
+			</button> -->
+			<br>
+			<br>
+
+			<div class="login-form-head">
+				<h4>Forma de Pagamento</h4>
+			</div>
+
+			<br>
+			<br>
+
+			<h4>Quantidade de parcelas</h4>
+			<input id="quantidadeParcela" class="form-control" type="number" value="1"/>
+
+			<br>
+			<br>
+
+			<h4>Cartões de Crédito</h4>
+
+			<br/>
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Número do cartão</th>
+						<th scope="col">Data de Validade</th>
+						<th align="center" scope="col">Bandeira</th>
+						<th scope="col">Quantidade de parcela</th>
+						<th scope="col">Situação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let cartao of cliente.cartoes  let i = index" [attr.data-index]="i">
+						<th scope="row">{{i + 1}}</th>
+						<td>{{cartao?.numeroCartao}}</td>
+						<td>{{cartao?.dataValidade}}</td>
+						<td align="center">
+							<div *ngIf="cartao?.idBandeira == 1">
+								<img style="width: 50px;height: 30px;" src="/assets/images/icon/mastercard.png" alt="MasterCard"/> 
+							</div>
+							<div *ngIf="cartao?.idBandeira == 2">
+								<img style="width: 50px;height: 30px;" src="/assets/images/icon/visa.png" alt="Visa"/> 
+							</div>
+							<div *ngIf="cartao?.idBandeira == 3">
+								<img style="width: 50px;height: 30px;" src="/assets/images/icon/dinner.png" alt="Dinner"/> 
+							</div>
+						</td>
+						<td>
+							<input 
+								class="form-control"
+								type="number"
+								value="{{cartao?.quantidadeParcela}}"
+								(change)="atualizaQuantidadeParcelaPorCartao($event, i)"/>
+						</td>
+						<td>
+							<div *ngIf="cartao.selected" (click)="selectCartao(i)">
+								<span class="badge badge-success" style="cursor: pointer;">Em uso</span>
+							</div>
+							<div *ngIf="!cartao.selected" (click)="selectCartao(i)">
+								<span class="badge badge-primary" style="cursor: pointer;">Usar este cartão</span>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<!-- <button routerLink="/altera-cartao/{{cartao.id}}"> -->
+			<!-- <button class="btn btn-primary" style="margin-right: 4%;" routerLink="/altera-cartao/">
+				Alterar Cartao
+			</button>
+			<button class="btn btn-primary" (click)="cadastrarCartao()">
+				Cadastrar Novo Cartao
+			</button> -->
+			
+			<br>
+			<button style="float: right;" id="success" class="btn btn-success" (click)="mandarPedido()">
+				Finalizar compra
+			</button>
+			<br>
+			<br>
+		</div>
+	</div>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<!-- <div class="col-sm-3" style="float: right;">
+			<div class="card">
+				<!-- *ngFor="let item of carrinho  let i = index" [attr.data-index]="i"  -->
+				<!-- <div class="card-body" style="padding-bottom: 27%; font-weight: bold">
+					<h5 class="card-title">Total da compra</h5>
+					<p class="card-text">
+						Total <label> {{ total() }} <!-- {{item.pedido.total_compra}} </label>-->
+					<!-- </p>
+					<p class="card-text">
+						Frete <label>{{ frete?.valor_frete }}</label>
+					</p>
+					<p class="card-text">
+						Cupom <label>R$ 4,00</label>
+					</p>
+					<p class="card-text">
+						SubTotal <label>R$ 34,00</label>
+					</p>
+					
+					<button class="btn btn-primary" (click)="mandarPedido()">
+						Continuar
+					</button>
+				</div>
+			</div>
+		</div> -->
+
+
+
+<!-- 	<div class="row" style="margin-bottom: 3%;">
+-->		
+		<!-- <div class="col-sm-6">
+			<div class="card"> -->
+				<!-- <div class="card-body">
+					<h5 class="card-title">Cupom</h5>
+					<p class="card-text">Utilize seu cupom para recer descontos</p>
+					<input style="margin-bottom: 4%" class="form-control" type="text" id="cupom" name="cupom"
+						placeholder="4RV538715" maxlength="40">
+					<button class="btn btn-primary" routerLink="/ecommerce-index">
+						Aplicar
+					</button>
+				</div> -->
+				<!-- <div class="card-body">
+					<h5 class="card-title">Consulte o valor do seu frete</h5>
+					<input style="margin-bottom: 4%" class="form-control" type="text" id="frete" name="frete"
+						placeholder="08978-800" maxlength="9">
+					<button class="btn btn-primary" routerLink="/ecommerce-index">
+						Consultar
+					</button>
+				</div> -->
+				<!-- <div class="card-body">
+					<div class="panel-heading">
+						<h1>Consultar Frete</h1>
+					</div>
+					<div class="col-lg-12 form-group">
+						<label>Digite seu CEP</label>
+						<input id="Cep" type="text" size="9" maxlength="9" class="form-control"
+							formControlName="ValorFrete" />
+					</div>
+
+					<div class="col-lg-12 form-group">
+						<input id="btnFrete" value="calcular Frete" class="btn btn-primary form-control" 
+							type="submit"
+							(click)='CalcularFrete()' />
+					</div>
+
+					<div class="col-lg-12 form-group">
+						<a href="http://www.buscacep.correios.com.br/servicos/dnec/index.do" 
+							title="Não sei meu CEP"
+							target="_blank" class="link">Não sei meu CEP</a>
+					</div>
+				</div>
+
+				<div class="col-lg-4 text-center">
+					<div *ngIf="frete">
+						<strong> Subtotal Frete R$ {{item.pedido.valor_frete}} </strong>
+					</div>
+					<div *ngIf="!frete">
+						<strong> Subtotal Frete CEP não informado</strong>
+					</div>
+				</div> -->
+		<!-- 	</div>
+		</div> -->
+<!-- 
+		<div class="col-sm-6">
+			<div class="card">
+				<app-ecommerce-frete></app-ecommerce-frete>
+			</div>
+		</div>
+
+		<div class="col-sm-6">
+			<div class="card">
+				<div class="card-body" style="padding-bottom: 27%; font-weight: bold">
+					<h5 class="card-title">Total da compra</h5>
+					<p class="card-text">Total <label>R$ 34,00</label></p>
+					<p class="card-text">SubTotal <label>R$ 34,00</label></p>
+					<p class="card-text">Frete <label>R$ 4,00</label></p>
+					<button class="btn btn-primary" routerLink="/ecommerce-pagamento">
+						Continuar
+					</button>
+				</div>
+			</div>
+		</div>
+	</div> -->

@@ -1,0 +1,108 @@
+<br>
+<div class="login-form-head">
+	<h2>Cadastro de Endereco</h2>
+  <h5>Insira os dados do Endereco!</h5>
+  <br>
+</div>
+<div class="login-form-body">
+	<form [formGroup]="form" (submit)="onSubmit()">
+
+      <div class="form-group row">
+          <label for="idCidade" class="col-sm-2 col-form-label">Cidade*</label>
+          <div class="col-sm-10">
+            <select
+              class="custom-select mr-sm-2"
+              id="idCidade"
+              formControlName="idCidade"
+              [ngClass]= " { 'is-invalid': submitted && hasError('idCidade') } ">
+              <option value="">Selecione sua Cidade</option>
+              <option value="1">Mogi das Cruzes</option>
+              <option value="2">Suzano</option>
+              <option value="3">São Paulo</option>
+              <option value="4">Poa</option>
+            </select>
+          </div>
+        </div>
+    
+        <div class="form-group row">
+          <label for="logradouro" class="col-sm-2 col-form-label">Logradouro*</label>
+          <div class="col-sm-10">
+            <input
+              class="form-control"
+              type="text"
+              id="logradouro"
+              name="logradouro"
+              placeholder="Insira o nome de sua Rua"
+              formControlName = "logradouro"
+              [ngClass]= " { 'is-invalid': submitted && hasError('logradouro') } ">
+          </div>
+        </div>
+    
+        <div class="form-group row">
+          <label for="numero" class="col-sm-2 col-form-label">Número*</label>
+          <div class="col-sm-10">
+            <input
+              class="form-control"
+              type="text"
+              id="numero"
+              name="numero"
+              placeholder="Insira o numero de sua casa"
+              formControlName = "numero"
+              [ngClass]= " { 'is-invalid': submitted && hasError('numero') } ">
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label for="bairro" class="col-sm-2 col-form-label">Bairro*</label>
+          <div class="col-sm-10">
+            <input
+              class="form-control"
+              type="text"
+              id="bairro"
+              name="bairro"
+              placeholder="Insira o nome do seu Bairro"
+              formControlName = "bairro"
+              [ngClass]= " { 'is-invalid': submitted && hasError('bairro') } ">
+          </div>
+        </div>
+        
+        <div class="form-group row">
+          <label for="cep" class="col-sm-2 col-form-label">CEP*</label>
+          <div class="col-sm-10">
+            <input
+              class="form-control"
+              type="text"
+              id="cep"
+              name="cep"
+              placeholder="CEP: 99999-999"
+              formControlName = "cep"
+              [ngClass]= " { 'is-invalid': submitted && hasError('cep') } ">
+          </div>
+        </div>
+    
+        <div class="form-group row">
+          <label for="observacao" class="col-sm-2 col-form-label">Observação*</label>
+          <div class="col-sm-10">
+            <input
+              class="form-control"
+              type="text"
+              id="observacao"
+              name="observacao"
+              placeholder="Insira alguma informação adicional sobre o seu bairro"
+              formControlName = "observacao"
+              [ngClass]= " { 'is-invalid': submitted && hasError('observacao') } ">
+          </div>
+        </div>
+  
+      <p>* - Informações obrigatórias</p>
+
+      <div>
+        <p style="color: #FF0000; text-align: center">{{serverError}}</p>
+      </div>
+
+		<button type="submit" class="btn btn-primary">Cadastrar</button>
+		&nbsp;
+		<button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
+	</form>
+</div>
+<br>

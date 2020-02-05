@@ -1,0 +1,32 @@
+<br>
+<h4>Filmes Inativos</h4>
+<table class="table">
+	<thead>
+		<tr class="p-3 mb-2 bg-info text-white">
+			<th scope="col">#</th>
+			<th scope="col">Nome</th>
+			<th scope="col">Código de barras</th>
+			<th scope="col">Ano de lançamento</th>
+			<th scope="col">Situação</th>
+			<th scope="col">Opções</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let filme of filmes">
+			<th scope="row">{{filme.id}}</th>
+			<td>{{filme.nome}}</td>
+			<td>{{filme.codigo_barras}}</td>
+			<td>{{filme.ano}}</td>
+			<td>{{filme.status ? 'ativo' : 'inativo'}}</td>
+			<td>
+				<button  class="btn btn-outline-info" type="submit">
+					<a routerLink="/altera-filme/{{filme.id}}">Alterar Filme</a>
+				</button>
+
+				<button class="btn btn-outline-secondary" type="submit" (click)="activateMovie(filme)">
+					<a href="javascript: void(0);">Ativar Filme</a>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

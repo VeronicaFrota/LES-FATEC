@@ -1,0 +1,27 @@
+<br>
+<h2>Pedidos de Troca Cadastrados</h2>
+<table class="table">
+	<thead>
+		<tr class="p-3 mb-2 bg-info text-white">
+			<th scope="col">#</th>
+			<th scope="col">ID Cliente</th>
+			<th scope="col">Código</th>
+			<th scope="col">Valor</th>
+			<th scope="col">Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr class="item-cupom" *ngFor="let cupom of cupons">
+			<th scope="row">{{cupom.id}}</th>
+			<td>{{cupom.idCliente}}</td>
+			<td>{{cupom.codigo}}</td>
+			<td>{{cupom.valor | currency: 'BRL':true }}</td>
+			<td *ngIf="cupom.status == false">
+				<button disabled="disabled" type="button" class="btn btn-danger btn-block">Inativo</button>
+			</td>
+			<td *ngIf="cupom.status == true">
+				<button disabled="disabled" type="button" class="btn btn-success btn-block">Ativo</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

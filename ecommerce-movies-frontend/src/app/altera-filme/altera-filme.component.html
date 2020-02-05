@@ -1,0 +1,189 @@
+<br>
+<div class="login-form-head">
+	<h2>Edição de Filmes</h2>
+	<br>
+</div>
+<div class="login-form-body">
+	<form [formGroup]="form" (submit)="onSubmit()">
+		<div class="form-group row">
+			<label for="nome" class="col-sm-2 col-form-label">Nome do Filme</label>
+			<div class="col-sm-10">
+				<input
+					required
+					class="form-control"
+					type="text"
+					id="nome"
+					name="nome"
+					formControlName="nome"
+					placeholder="Nome do Filme"
+					maxlength="40"
+					[ngClass]= " { 'is-invalid': submitted && hasError('nome') } ">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="codigo_barras" class="col-sm-2 col-form-label">Código de Barras</label>
+			<div class="col-sm-10">
+				<input
+					required
+					class="form-control"
+					type="text"
+					id="codigo_barras"
+					name="codigo_barras"
+					formControlName = "codigo_barras"
+					placeholder="Código de Barras (até 9 caracteres)"
+					maxlength="9"
+					[ngClass]= " { 'is-invalid': submitted && hasError('codigo_barras') } ">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="genero" class="col-sm-2 col-form-label">Gênero do Filme</label>
+			<div class="col-sm-10">
+				<select
+					class="custom-select mr-sm-2"
+					id="genero"
+					formControlName="genero"
+					[ngClass]= " { 'is-invalid': submitted && hasError('genero') } ">
+					<option value="" selected>Selecione um gênero</option>
+					<option value="1">Ação</option>
+					<option value="2">Ficção</option>
+					<option value="3">Aventura</option>
+					<option value="4">Susupense</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="ano" class="col-sm-2 col-form-label">Ano de Lançamento</label>
+			<div class="col-sm-10">
+				<input
+					class="form-control"
+					type="text"
+					id="ano"
+					name="ano"
+					placeholder="Ano de Lançamento"
+					formControlName = "ano"
+					maxlength="4"
+					[ngClass]= " { 'is-invalid': submitted && hasError('genero') } ">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="paisOrigem" class="col-sm-2 col-form-label">País de Origem</label>
+			<div class="col-sm-10">
+				<select
+					class="custom-select mr-sm-2"
+					id="paisOrigem"
+					formControlName="paisOrigem"
+					[ngClass]= " { 'is-invalid': submitted && hasError('paisOrigem') } ">
+					<option value="" selected>Selecione um país</option>
+					<option value="1">Estados Unidos</option>
+					<option value="2">Brasil</option>
+					<option value="3">Franca</option>
+					<option value="4">Alemanha</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="idioma" class="col-sm-2 col-form-label">Idioma</label>
+			<div class="col-sm-10">
+				<select
+					class="custom-select mr-sm-2"
+					id="idioma"
+					formControlName="idioma"
+					[ngClass]= " { 'is-invalid': submitted && hasError('idioma') } ">
+					<option value="" selected>Selecione um idioma</option>
+					<option value="1">Português</option>
+					<option value="2">Inglês</option>
+					<option value="3">Frances</option>
+					<option value="4">Alemão</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="classificacaoEtaria" class="col-sm-2 col-form-label">Classificação Etária</label>
+			<div class="col-sm-10">
+				<select
+					class="custom-select mr-sm-2"
+					id="classificacaoEtaria"
+					formControlName="classificacaoEtaria"
+					[ngClass]= " { 'is-invalid': submitted && hasError('classificacaoEtaria') } ">
+					<option value="" selected>Selecione uma classificação etária</option>
+					<option value="1">Livre</option>
+					<option value="2">10 anos</option>
+					<option value="3">14 anos</option>
+					<option value="4">16 anos</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="sinopse" class="col-sm-2 col-form-label">Sinopse</label>
+			<div class="col-sm-10">
+				<textarea
+					class="form-control"
+					id="sinopse" 
+					name="sinopse"
+					formControlName = "sinopse"
+					rows="3"
+					maxlength="255"
+					[ngClass]= " { 'is-invalid': submitted && hasError('sinopse') } "></textarea>
+			</div>
+		</div>
+
+		<div>
+			<p style="color: #FF0000; text-align: center">{{serverError}}</p>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Atualizar</button>
+		&nbsp;
+		<button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
+	
+		<br>
+		<br>
+		<br>
+		<h2>Estoque de Filmes</h2>
+		<br>
+		<table class="table">
+			<thead>
+				<tr class="p-3 mb-2 bg-info text-white">
+					<th scope="col">#</th>
+					<th scope="col">Id Filme</th>
+					<th scope="col">Fornecedor</th>
+					<th scope="col">Qtde. em estoque</th>
+					<th scope="col">Valor de compra</th>
+					<th scope="col">Valor de venda</th>
+					<th scope="col">Situação</th>
+					<th scope="col">Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="item-estoque" *ngFor="let estoque of estoques">
+					<th scope="row">{{estoque.id}}</th>
+					<td>{{estoque.id_filme}}</td>
+					<td>{{estoque.fornecedor}}</td>
+					<td>{{estoque.quantidade_estoque}}</td>
+					<td>{{estoque.valor_compra}}</td>
+					<td>{{estoque.valor_venda}}</td>
+					<td>{{estoque.status ? 'Ativo' : 'Inativo'}}</td>
+					<td>
+						<button class="btn btn-outline-info" routerLink="/altera-estoque/{{estoque.id}}">
+							Alterar Estoque
+						</button>
+						<button class="btn btn-outline-danger" type="submit" (click)="deletarEstoque(estoque)">
+							<a class="item-estoque-delete" href="javascript: void(0);">Deletar Estoque</a>
+						</button>
+					</td>
+				</tr>
+				<!-- <button (click)="cadastrarFornecedor()">
+					Cadastrar Novo Fornecedor
+				</button> -->
+			</tbody>
+		</table>
+		<br>
+		<br>
+	</form>
+</div>

@@ -1,0 +1,27 @@
+
+
+<!-- <canvas #lineChart>{{ chart }}</canvas>-->
+
+<div>
+	<br>
+	<h1>Gráfico de Vendas Mensal por Categoria</h1>
+	<h3>Pesquisa por Período</h3>
+</div>
+<div>
+		<br>
+		<h5>Insira a Data Inicial</h5>
+		<input id="diaComeco" class="form-control" type="date" #diaComeco>
+		<h5>Insira a Data Final</h5>
+		<input id="diaFim" class="form-control" type="date" #diaFim>
+		<br>
+		<button id="btnPesquisa" (click)="realizaFiltro(diaComeco.value, diaFim.value)"class="btn btn-primary">Pesquisar</button>
+		<br>
+</div>
+
+<div style="display: block">
+		<canvas baseChart 
+			[datasets]="lineChartData"
+			[labels]="lineChartLabels"
+			[chartType]="lineChartType">
+		</canvas>
+</div>

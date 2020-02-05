@@ -1,0 +1,57 @@
+<br>
+<h2>Pedidos Cadastrados</h2>
+<form [formGroup]="form">
+	<table class="table">
+		<thead>
+			<tr class="p-3 mb-2 bg-info text-white">
+				<th scope="col">#</th>
+				<th scope="col">ID Cliente</th>
+				<th scope="col">Preço</th>
+				<th scope="col">Progresso</th>
+				<th scope="col">Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="item-pedido" *ngFor="let pedido of pedidos">
+				<th scope="row" *ngIf="pedido.id_transacao < 5">{{pedido.id}}</th>
+				<td *ngIf="pedido.id_transacao < 5">{{pedido.id_cliente}}</td>
+				<td *ngIf="pedido.id_transacao < 5">{{pedido.total_compra | currency: 'BRL': true}}</td>
+				<td *ngIf="pedido.id_transacao < 5">
+					<div *ngIf="pedido.id_transacao == 1" class="progress">
+						<div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25"
+							aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					<div *ngIf="pedido.id_transacao == 2" class="progress">
+						<div class="progress-bar bg-warning" role="progressbar" style="width: 50%" aria-valuenow="50"
+							aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					<div *ngIf="pedido.id_transacao == 3" class="progress">
+						<div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="75"
+							aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+					<div *ngIf="pedido.id_transacao == 4" class="progress">
+						<div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="100"
+							aria-valuemin="0" aria-valuemax="100"></div>
+					</div>
+				</td>
+				<td *ngIf="pedido.id_transacao < 5">
+					<div *ngIf="pedido.id_transacao == 1">
+						<p id="sequencia"> Processamento</p>
+					</div>
+					<div *ngIf="pedido.id_transacao == 2">
+						<p id="sequencia"> Separação</p>
+					</div>
+					<div *ngIf="pedido.id_transacao == 3">
+						<p id="sequencia"> Trânsito</p>
+					</div>
+					<div *ngIf="pedido.id_transacao == 4">
+						<select class="custom-select mr-sm-2" id="sequencia" (change)="andamentoPedido(pedido)">
+							<option disabled selected>Entregue</option>
+							<option value="troca">Solicitar a troca</option>
+						</select>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</form>

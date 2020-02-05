@@ -1,0 +1,155 @@
+<br>
+<div class="login-form-head">
+	<h2>Alteração de Cliente</h2>
+	<h5>Insira os dados do Cliente!</h5>
+	<br>
+</div>
+<div class="login-form-body">
+	<form [formGroup]="form" (submit)="onSubmit()">
+		<div class="form-group row">
+			<label for="nome" class="col-sm-2 col-form-label">Nome do Cliente*</label>
+			<div class="col-sm-10">
+				<input required class="form-control" type="text" id="nome" name="nome" formControlName="nome"
+					placeholder="Nome do Cliente" maxlength="40">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="cpf" class="col-sm-2 col-form-label">CPF*</label>
+			<div class="col-sm-10">
+				<input required class="form-control" type="text" id="cpf" name="cpf" formControlName="cpf"
+					placeholder="CPF: XXX.XXX.XXX-XX" maxlength="14"
+					[ngClass]=" { 'is-invalid': submitted && hasError('cpf') } ">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="dataNascimento" class="col-sm-2 col-form-label">Data Nascimento*</label>
+			<div class="col-sm-10">
+				<input required class="form-control" type="text" id="dataNascimento" name="dataNascimento"
+					formControlName="dataNascimento" placeholder="YYYY-MM-DD"
+					[ngClass]=" { 'is-invalid': submitted && hasError('dataNascimento') } ">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="email" class="col-sm-2 col-form-label">Email*</label>
+			<div class="col-sm-10">
+				<input required class="form-control" type="text" id="email" name="email" formControlName="email"
+					placeholder="exemplo@email.com" [ngClass]=" { 'is-invalid': submitted && hasError('email') } " disabled>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="genero" class="col-sm-2 col-form-label">Gênero*</label>
+			<div class="col-sm-10">
+				<select class="custom-select mr-sm-2" id="genero" formControlName="genero"
+					[ngClass]=" { 'is-invalid': submitted && hasError('genero') } ">
+					<option value="" selected>Selecione um gênero</option>
+					<option value="M">Masculino</option>
+					<option value="F">Feminino</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="telefone" class="col-sm-2 col-form-label">Telefone*</label>
+			<div class="col-sm-10">
+				<input class="form-control" type="text" id="telefone" name="telefone" placeholder="99999-9999"
+					formControlName="telefone"  [ngClass]=" { 'is-invalid': submitted && hasError('telefone') } ">
+			</div>
+		</div>
+		<!--Mo cáo-->
+		<!-- {{event.date | date : 'yyyy-MM-dd'}} -->
+
+		<p>* - Informações obrigatórias</p>
+
+		<div>
+			<p id="mensagemErro" style="color: #FF0000; text-align: center">{{serverError}}</p>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Atualizar</button>
+		&nbsp;
+		<button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
+		<br>
+		<br>
+		<button class="btn btn-secondary btn-lg btn-block" (click)="navigateTo()">
+			Alterar Senha
+		</button>
+		<br>
+		<br>
+		<h2>Endereços do Cliente</h2>
+		<table class="table">
+			<thead>
+				<tr class="p-3 mb-2 bg-success text-white">
+					<th scope="col">#</th>
+					<th scope="col">Id Cliente</th>
+					<th scope="col">Logradouro</th>
+					<th scope="col">Bairro</th>
+					<th scope="col">Cidade</th>
+					<th scope="col">Status</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="item-endereco" *ngFor="let endereco of enderecos">
+					<td>{{endereco.id}}</td>
+					<td>{{endereco.idCliente}}</td>
+					<td>{{endereco.logradouro}}</td>
+					<td>{{endereco.bairro}}</td>
+					<td>{{endereco.idCidade}}</td>
+					<td> {{endereco.status ? 'Ativo' : 'Inativo'}}</td>
+					<td>
+						<button class="btn btn-outline-success" routerLink="/altera-endereco/{{endereco.id}}">
+							Alterar Endereco
+						</button>
+						<button class="btn btn-outline-danger" (click)="deletarEndereco(endereco)">
+							<a class="item-endereco-delete">Deletar Endereco</a>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<button class="btn btn-secondary btn-lg btn-block" (click)="cadastrarEndereco()">
+			Cadastrar Novo Endereco
+		</button>
+		<br>
+		<br>
+		<h2>Cartões Cadastrados</h2>
+		<table class="table">
+			<thead>
+				<tr class="p-3 mb-2 bg-primary text-white">
+					<th scope="col">#</th>
+					<th scope="col">Id Cliente</th>
+					<th scope="col">Numero do Cartao</th>
+					<th scope="col">Data de Validade</th>
+					<th scope="col">Bandeira</th>
+					<th scope="col">Status</th>
+					<th>Opções</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="item-cartao" *ngFor="let cartao of cartaos">
+					<th scope="row">{{cartao.id}}</th>
+					<td>{{cartao.idCliente}}</td>
+					<td>{{cartao.numeroCartao}}</td>
+					<td>{{cartao.dataValidade}}</td>
+					<td>{{cartao.idBandeira}}</td>
+					<td>{{cartao.status ? 'Ativo' : 'Inativo'}}</td>
+					<td>
+						<button class="btn btn-outline-primary" routerLink="/altera-cartao/{{cartao.id}}">
+							Alterar Cartao
+						</button>
+						<button class="btn btn-outline-danger" (click)="deletarCartao(cartao)">
+							<a class="item-cartao-delete">Deletar Cartao</a>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<button class="btn btn-secondary btn-lg btn-block" (click)="cadastrarCartao()">
+			Cadastrar Novo Cartao
+		</button>
+		<br>
+	</form>
+</div>

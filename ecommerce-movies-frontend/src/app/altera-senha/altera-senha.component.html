@@ -1,0 +1,22 @@
+
+
+<!-- <canvas #lineChart>{{ chart }}</canvas>-->
+
+<div>
+	<br>
+	<h1>Alteração de Senha</h1>
+	<h3></h3>
+</div>
+<div>
+		<br>
+		<h5>Insira sua Senha Atual</h5>
+		<input id="senhaAtual" class="form-control" type="password" placeholder="Senha Atual" #senhaAtual maxlength="20">
+		<h5>Insira sua Nova Senha</h5>
+    <input id="senhaNova1" class="form-control" type="password" placeholder="Senha Nova" #senhaNova1 maxlength="20">
+    <h5>Insira Novamente sua Nova Senha</h5>
+		<input id="senhaNova2" class="form-control" type="password" placeholder="Senha Nova" #senhaNova2 maxlength="20">
+		<br>
+    <button id="btnAlteraSenha"(click)="alteraSenha(senhaAtual.value, senhaNova1.value, senhaNova2.value)" 
+    class="btn btn-primary">Alterar Senha</button>
+		<br>
+</div>

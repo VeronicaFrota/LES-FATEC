@@ -1,0 +1,57 @@
+<div>
+	<br>
+	<h1>Gráfico de Vendas Mensal por Sexo</h1>
+	<h3>Pesquisa por Período de Meses</h3>
+</div>
+<div>
+		<br>
+		<h5>Insira o Mês Inicial</h5>
+		<select id="mesComeco" class="custom-select mr-sm-2" #mesComeco>
+			<option disabled selected>Mês Inicial</option>
+			<option value="1">Janeiro</option>
+			<option value="2">Fevereiro</option>
+			<option value="3">Março</option>
+			<option value="4">Abril</option>
+			<option value="5">Maio</option>
+			<option value="6">Junho</option>
+			<option value="7">Julho</option>
+			<option value="8">Agosto</option>
+			<option value="9">Setembro</option>
+			<option value="10">Outubro</option>
+			<option value="11">Novembro</option>
+			<option value="12">Dezembro</option>
+		</select>
+		<h5>Insira o Mês Final</h5>
+		<select id="mesFim" class="custom-select mr-sm-2" #mesFim>
+			<option disabled selected>Mês Inicial</option>
+			<option value="1">Janeiro</option>
+			<option value="2">Fevereiro</option>
+			<option value="3">Março</option>
+			<option value="4">Abril</option>
+			<option value="5">Maio</option>
+			<option value="6">Junho</option>
+			<option value="7">Julho</option>
+			<option value="8">Agosto</option>
+			<option value="9">Setembro</option>
+			<option value="10">Outubro</option>
+			<option value="11">Novembro</option>
+			<option value="12">Dezembro</option>
+		</select>
+		<br>
+		<h5>Insira o Ano de Pesquisa</h5>
+		<input id="ano" class="form-control" type="number" placeholder="Ano de Pesquisa" #ano >
+		<br>
+		<button id="btnPesquisa" (click)="realizaFiltro(mesComeco.value, mesFim.value, ano.value)"class="btn btn-primary">Pesquisar</button>
+		<br>
+</div>
+
+<div>
+	<div style="display: block;">
+		<canvas baseChart
+			[datasets]="barChartData"
+			[labels]="barChartLabels"
+			[options]="barChartOptions"
+			[legend]="barChartLegend"
+			[chartType]="barChartType"></canvas>
+	</div>
+</div>

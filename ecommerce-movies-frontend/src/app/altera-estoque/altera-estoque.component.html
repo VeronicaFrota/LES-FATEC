@@ -1,0 +1,79 @@
+<br>
+<div class="login-form-head">
+	<h2>Alteração de Estoque</h2>
+	<h5>Insira os dados do estoque!</h5>
+</div>
+<br>
+<div class="login-form-body">
+	<form [formGroup]="form" (submit)="onSubmit()">
+
+		<div class="form-group row">
+			<label for="fornecedor" class="col-sm-2 col-form-label">Nome do Fornecedor</label>
+			<div class="col-sm-10">
+				<input
+					required
+					class="form-control"
+					type="text"
+					id="fornecedor"
+					name="fornecedor"
+					formControlName="fornecedor"
+					placeholder="Nome do fornecedor"
+					maxlength="50"
+					[ngClass]= " { 'is-invalid': submitted && hasError('fornecedor') } ">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="quantidadeEstoque" class="col-sm-2 col-form-label">Qtde. em estoque</label>
+			<div class="col-sm-10">
+				<input
+					class="form-control"
+					type="text"
+					maxlength="5"
+					id="quantidadeEstoque"
+					name="quantidadeEstoque"
+					placeholder="Quantidade de produto no estoque"
+					formControlName = "quantidadeEstoque"
+					[ngClass]= " { 'is-invalid': submitted && hasError('quantidadeEstoque') } ">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="valorCompra" class="col-sm-2 col-form-label">Valor de compra</label>
+			<div class="col-sm-10">
+				<input
+					class="form-control"
+					type="text"
+					maxlength="5"
+					id="valorCompra"
+					name="valorCompra"
+					placeholder="Valor de compra"
+					formControlName = "valorCompra"
+					[ngClass]= " { 'is-invalid': submitted && hasError('valorCompra') } ">
+			</div>
+		</div>
+
+		<div class="form-group row">
+			<label for="valorVenda" class="col-sm-2 col-form-label">Valor de venda</label>
+			<div class="col-sm-10">
+				<input
+					class="form-control"
+					type="text"
+					maxlength="5"
+					id="valorVenda"
+					name="valorVenda"
+					placeholder="Valor de venda"
+					formControlName = "valorVenda"
+					[ngClass]= " { 'is-invalid': submitted && hasError('valorVenda') } ">
+			</div>
+		</div>
+
+		<div>
+			<p style="color: #FF0000; text-align: center">{{serverError}}</p>
+		</div>
+
+		<button type="submit" class="btn btn-primary">Atualizar</button>
+		&nbsp;
+		<button type="button" class="btn btn-danger" (click)="onCancel()">Cancelar</button>
+	</form>
+</div>
